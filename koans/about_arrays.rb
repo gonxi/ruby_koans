@@ -42,7 +42,7 @@ class AboutArrays < Neo::Koan
     assert_equal [], array[4,0]
     assert_equal [], array[4,100]
     assert_equal nil, array[5,0]
-  end
+  end 
 
   def test_arrays_and_ranges
     assert_equal Range, (1..5).class
@@ -63,7 +63,7 @@ class AboutArrays < Neo::Koan
     array = [1,2]
     array.push(:last)
 
-    assert_equal [1,2,:last], array
+    assert_equal [1,2, :last], array
 
     popped_value = array.pop
     assert_equal :last, popped_value
@@ -74,11 +74,40 @@ class AboutArrays < Neo::Koan
     array = [1,2]
     array.unshift(:first)
 
-    assert_equal [:first,1 ,2], array
+    assert_equal [:first,1,2], array
 
     shifted_value = array.shift
     assert_equal :first, shifted_value
-    assert_equal [1,2], array
+    assert_equal  [1,2], array
+  end
+
+  def test_array_substraction
+    array = [1,2,3,4,5]
+    another_array = [2]
+
+    assert_equal [1,3,4,5], array - another_array
+  end
+
+  def test_substracting_multiple_array_values
+    array = [1,2,2,3,3,4,5]
+    another_array = [2,2,3,3]
+
+    assert_equal [1,4,5], array - another_array
+  end
+
+  def test_how_array_substraction_really_work
+    array = [2,3,4,5,6,2,7,2]
+    another_array = [2]
+
+    assert_equal [3,4,5,6,7], array - another_array
+  end
+
+  def test_substracting_multiple_values_from_arrays
+    array = [1,2,2,3,3,4,5,6,2,3,7]
+    another_array = [2,3]
+
+    assert_equal 2, another_array.size , "'another_array' should have two elements"
+    assert_equal  [1,4,5,6,7], array - another_array
   end
 
 end
