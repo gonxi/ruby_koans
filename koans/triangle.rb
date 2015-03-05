@@ -14,10 +14,16 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
- if (a == b) and (a == C)
- 	return :equilateral
- end
-
+	raise TriangleError, "Error numeros negativos o 0" if  ( a <= 0 ) or (b <= 0) or ( c <= 0)
+	raise TriangleError, "Error con los parametros" if  ( a + b <= c ) or ( a + c <=b ) or ( c + b <= a )
+ 
+ 	if (a == b) and (b == c) and (a == c)
+ 		return :equilateral
+ 	elsif (a == b) or (b == c ) or ( a == c)
+ 		return :isosceles
+	else
+ 		 return :scalene
+	 end
 end
 
 # Error class used in part 2.  No need to change this code.
